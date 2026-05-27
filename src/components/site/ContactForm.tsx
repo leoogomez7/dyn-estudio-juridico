@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
+import { ChevronRight } from "lucide-react";
 
 const schema = z.object({
   nombre: z.string().trim().min(2, "Ingresá tu nombre").max(80),
@@ -12,6 +13,9 @@ const schema = z.object({
 
 const DEST_EMAIL = "leorgomez7@gmail.com";
 
+// Cargamos la clave de forma segura desde tu .env.local
+const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
+
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
 
@@ -20,36 +24,65 @@ export function ContactForm() {
     const form = e.currentTarget;
     const fd = new FormData(form);
     const parsed = schema.safeParse(Object.fromEntries(fd));
+    
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Revisá los datos");
       return;
     }
+    
     setLoading(true);
     const { nombre, telefono, email, especialidad, mensaje } = parsed.data;
 
     try {
-      // FormSubmit.co — envío directo por email sin backend.
-      // La primera vez Google enviará un correo de activación a leorgomez7@gmail.com.
-      const body = new FormData();
-      body.append("name", nombre);
-      body.append("email", email);
-      body.append("phone", telefono);
-      body.append("area", especialidad);
-      body.append("message", mensaje);
-      body.append("_subject", `Nueva consulta — ${especialidad} — ${nombre}`);
-      body.append("_template", "table");
-      body.append("_captcha", "false");
+      if (!BREVO_API_KEY) {
+        throw new Error("Falta la clave API de Brevo en las variables de entorno");
+      }
 
-      const res = await fetch(`https://formsubmit.co/ajax/${DEST_EMAIL}`, {
+      // Envío directo a los servidores de Brevo usando la URL oficial
+      const res = await fetch("https://brevo.com", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body,
+        headers: {
+          "accept": "application/json",
+          "api-key": BREVO_API_KEY,
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          sender: { 
+            name: "D&N Web Form", 
+            email: "leorgomez7@gmail.com" // Tu correo verificado en Brevo
+          },
+          to: [
+            { 
+              email: DEST_EMAIL, 
+              name: "D&N Estudio Jurídico" 
+            }
+          ],
+          subject: `Nueva consulta — ${especialidad} — ${nombre}`,
+          htmlContent: `
+            <div style="font-family: sans-serif; padding: 20px; color: #111;">
+              <h2 style="color: #c5a880; border-bottom: 1px solid #eee; padding-bottom: 10px;">Nueva consulta recibida</h2>
+              <p><strong>Nombre:</strong> ${nombre}</p>
+              <p><strong>Teléfono:</strong> ${telefono}</p>
+              <p><strong>Email del cliente:</strong> ${email}</p>
+              <p><strong>Área de consulta:</strong> ${especialidad}</p>
+              <br/>
+              <p><strong>Mensaje:</strong></p>
+              <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border-left: 4px solid #c5a880;">
+                ${mensaje.replace(/\n/g, '<br/>')}
+              </div>
+            </div>
+          `
+        })
       });
-      if (!res.ok) throw new Error("send failed");
+
+      if (!res.ok) throw new Error("Brevo API error");
+
       toast.success("Consulta enviada. Te respondemos a la brevedad.");
       form.reset();
-    } catch {
-      // Fallback: abrir cliente de correo
+    } catch (error) {
+      console.error("Error:", error);
+      
+      // Respaldo (Fallback): Si la API falla, abre el gestor de correo local
       const subject = encodeURIComponent(`Consulta web — ${especialidad}`);
       const bodyTxt = encodeURIComponent(
         `Nombre: ${nombre}\nTeléfono: ${telefono}\nEmail: ${email}\nÁrea: ${especialidad}\n\n${mensaje}`,
@@ -71,26 +104,26 @@ export function ContactForm() {
           <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
             Nombre
           </label>
-          <input name="nombre" placeholder="Tu nombre completo" className={inputCls} />
+          <input name="nombre" placeholder="Tu nombre completo" className={inputCls} required />
         </div>
         <div>
           <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
             Teléfono
           </label>
-          <input name="telefono" placeholder="+54 9 11 ..." className={inputCls} />
+          <input name="telefono" placeholder="+54 9 11 ..." className={inputCls} required />
         </div>
       </div>
       <div>
         <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
           Email
         </label>
-        <input name="email" type="email" placeholder="tu@email.com" className={inputCls} />
+        <input name="email" type="email" placeholder="tu@email.com" className={inputCls} required />
       </div>
       <div>
         <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
           Especialidad
         </label>
-        <select name="especialidad" defaultValue="" className={inputCls}>
+        <select name="especialidad" defaultValue="" className={inputCls} required>
           <option value="" disabled>
             Seleccionar área
           </option>
@@ -111,14 +144,16 @@ export function ContactForm() {
           rows={4}
           placeholder="Contanos brevemente tu caso..."
           className={inputCls}
+          required
         />
       </div>
       <button
         type="submit"
         disabled={loading}
-        className="w-full px-6 py-3.5 rounded-full font-medium btn-gold disabled:opacity-60"
+        className="w-full px-6 py-3.5 rounded-full font-medium btn-gold disabled:opacity-60 flex items-center justify-center gap-2"
       >
         {loading ? "Enviando..." : "Enviar consulta"}
+        {!loading && <ChevronRight className="h-4 w-4" />}
       </button>
       <p className="text-[11px] text-muted-foreground/80 text-center">
         Tu información es tratada con absoluta confidencialidad.
