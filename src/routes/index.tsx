@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import icono from "@/assets/icono.jpeg";
 import {
   Shield,
   Users,
@@ -999,7 +1000,7 @@ function Footer() {
             {/* LOGO */}
             <div className="flex items-center">
               <img 
-                src="/assets/icono.jpeg" 
+                src={icono} 
                 alt="D&N Estudio Jurídico Logo" 
                 className="h-32 w-auto object-contain" 
               />
