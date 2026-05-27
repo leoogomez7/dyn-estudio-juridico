@@ -110,14 +110,19 @@
   .border-gold\/30 {
     border-color: color-mix(in oklab, var(--gold) 30%, transparent);
   }
-  .gradient-text-gold {
+.gradient-text-gold {
     background: linear-gradient(135deg, oklch(0.92 0.1 90), oklch(0.78 0.16 80));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    width: 649px;
-    height: 79px;
-  }
+    
+    /* Cambios clave para evitar que se corte */
+    width: 100%;
+    max-width: 649px;
+    height: auto;
+    display: inline-block;
+}
+
   .glass {
     background: linear-gradient(135deg,
       oklch(0.98 0.005 250 / 0.06),
