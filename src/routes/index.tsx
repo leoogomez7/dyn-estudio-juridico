@@ -302,9 +302,8 @@ const areas = [
       "Despidos y liquidaciones",
       "Reclamos de salarios",
       "Acoso y violencia laboral",
-      "Negociaciones colectivas",
-      "Contratos y convenios laborales",
-      "Indemnizaciones y acuerdos",
+      "ART",
+      "Indemnizaciones",
     ],
   },
 ];
@@ -483,7 +482,7 @@ function Honorarios() {
     {
       title: "Defensa Laboral",
       desc: "Asesoramiento y representación en despidos, reclamos y negociaciones laborales.",
-      bullets: ["Despidos y liquidaciones", "Reclamos de salarios", "Negociación de acuerdos", "Contratos laborales", "Indemnizaciones"],
+      bullets: ["Accidentes de Trabajo", "Reclamo de Indemnizaciones", ],
     },
     {
       title: "Divorcios y Sucesiones",
