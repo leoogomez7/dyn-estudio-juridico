@@ -116,11 +116,10 @@
     background-clip: text;
     color: transparent;
     
-    /* Cambios clave para evitar que se corte */
+    /* Ocupa todo el ancho disponible */
     width: 100%;
-    max-width: 649px;
     height: auto;
-    display: inline-block;
+    display: block;
 }
 
   .glass {
