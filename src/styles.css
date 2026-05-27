@@ -118,7 +118,7 @@
     
     /* Ocupa todo el ancho disponible */
     width: 100%;
-    height: auto;
+    height: 79px;
     display: block;
 }
 
