@@ -13,9 +13,6 @@ const schema = z.object({
 
 const DEST_EMAIL = "leorgomez7@gmail.com";
 
-// Cargamos la clave de forma segura desde tu .env.local
-const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
-
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
 
@@ -34,55 +31,29 @@ export function ContactForm() {
     const { nombre, telefono, email, especialidad, mensaje } = parsed.data;
 
     try {
-      if (!BREVO_API_KEY) {
-        throw new Error("Falta la clave API de Brevo en las variables de entorno");
-      }
+      // FormSubmit Ajax — Envío directo por email compatible con Vite y Vercel
+      const body = new FormData();
+      body.append("Nombre", nombre);
+      body.append("Email", email);
+      body.append("Teléfono", telefono);
+      body.append("Área de Especialidad", especialidad);
+      body.append("Consulta", mensaje);
+      body.append("_subject", `Nueva consulta — ${especialidad} — ${nombre}`);
+      body.append("_captcha", "false"); // Desactiva el captcha para que no interrumpa al cliente
 
-      // Envío directo a los servidores de Brevo usando la URL oficial
-      const res = await fetch("https://brevo.com", {
+      const res = await fetch(`https://formsubmit.co{DEST_EMAIL}`, {
         method: "POST",
-        headers: {
-          "accept": "application/json",
-          "api-key": BREVO_API_KEY,
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({
-          sender: { 
-            name: "D&N Web Form", 
-            email: "leorgomez7@gmail.com" // Tu correo verificado en Brevo
-          },
-          to: [
-            { 
-              email: DEST_EMAIL, 
-              name: "D&N Estudio Jurídico" 
-            }
-          ],
-          subject: `Nueva consulta — ${especialidad} — ${nombre}`,
-          htmlContent: `
-            <div style="font-family: sans-serif; padding: 20px; color: #111;">
-              <h2 style="color: #c5a880; border-bottom: 1px solid #eee; padding-bottom: 10px;">Nueva consulta recibida</h2>
-              <p><strong>Nombre:</strong> ${nombre}</p>
-              <p><strong>Teléfono:</strong> ${telefono}</p>
-              <p><strong>Email del cliente:</strong> ${email}</p>
-              <p><strong>Área de consulta:</strong> ${especialidad}</p>
-              <br/>
-              <p><strong>Mensaje:</strong></p>
-              <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border-left: 4px solid #c5a880;">
-                ${mensaje.replace(/\n/g, '<br/>')}
-              </div>
-            </div>
-          `
-        })
+        headers: { Accept: "application/json" },
+        body,
       });
 
-      if (!res.ok) throw new Error("Brevo API error");
-
+      if (!res.ok) throw new Error("Send failed");
+      
       toast.success("Consulta enviada. Te respondemos a la brevedad.");
       form.reset();
     } catch (error) {
-      console.error("Error:", error);
-      
-      // Respaldo (Fallback): Si la API falla, abre el gestor de correo local
+      console.error(error);
+      // Plan de respaldo si falla internet: abre el correo nativo del cliente
       const subject = encodeURIComponent(`Consulta web — ${especialidad}`);
       const bodyTxt = encodeURIComponent(
         `Nombre: ${nombre}\nTeléfono: ${telefono}\nEmail: ${email}\nÁrea: ${especialidad}\n\n${mensaje}`,
@@ -156,7 +127,7 @@ export function ContactForm() {
         {!loading && <ChevronRight className="h-4 w-4" />}
       </button>
       <p className="text-[11px] text-muted-foreground/80 text-center">
-        Tu información es tratada con absoluta confidencialidad.
+        Tu información es treated con absoluta confidencialidad.
       </p>
     </form>
   );
