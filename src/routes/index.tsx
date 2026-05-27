@@ -5,6 +5,7 @@ import {
   Users,
   Scroll,
   Briefcase,
+  Gavel,
   Clock,
   CheckCircle2,
   Star,
@@ -267,8 +268,8 @@ const areas = [
     tag: "Asesoramiento Integral",
     desc: "Asesoramiento estratégico y resolución de litigios complejos.",
     items: [
-      "Redacción de contratos",
       "Daños y perjuicios",
+      "Redacción de contratos",
       "Mediaciones",
       "Conflictos patrimoniales",
     ],
@@ -285,7 +286,21 @@ const areas = [
       "Fusiones y adquisiciones",
       "Reorganización societaria",
       "Contratos entre socios",
-      "Compliance y gobierno corporativo",
+    ],
+  },
+  {
+    id: "laboral",
+    icon: Gavel,
+    title: "Área Laboral",
+    tag: "Derecho del trabajador",
+    desc: "Defendemos derechos laborales y asesoramos a empleadores con experiencia práctica y compromiso.",
+    items: [
+      "Despidos y liquidaciones",
+      "Reclamos de salarios",
+      "Acoso y violencia laboral",
+      "Negociaciones colectivas",
+      "Contratos y convenios laborales",
+      "Indemnizaciones y acuerdos",
     ],
   },
 ];
@@ -297,7 +312,7 @@ function Areas() {
         <SectionHead
           eyebrow="Áreas de Especialidad"
           title={<>Práctica jurídica <span className="gradient-text-gold italic">de élite</span></>}
-          sub="Cuatro pilares de práctica, una sola filosofía: excelencia técnica al servicio de cada cliente."
+          sub="Cinco pilares de práctica, una sola filosofía: excelencia técnica al servicio de cada cliente."
         />
 
         <div className="mt-16 grid lg:grid-cols-3 gap-6">
@@ -455,6 +470,16 @@ function Honorarios() {
       title: "Asesoramiento en Contratos",
       desc: "Redacción, revisión y negociación de contratos civiles y comerciales.",
       bullets: ["Contratos a medida", "Cláusulas de protección", "Revisión técnica"],
+    },
+    {
+      title: "Asesoramiento Societario",
+      desc: "Servicios para la constitución, restructuración y cumplimiento de sociedades.",
+      bullets: ["Constitución de sociedades", "Contratos entre socios", "Reorganización societaria", "Fusiones y adquisiciones"],
+    },
+    {
+      title: "Defensa Laboral",
+      desc: "Asesoramiento y representación en despidos, reclamos y negociaciones laborales.",
+      bullets: ["Despidos y liquidaciones", "Reclamos de salarios", "Negociación de acuerdos", "Contratos laborales", "Indemnizaciones"],
     },
     {
       title: "Divorcios y Sucesiones",
@@ -661,7 +686,7 @@ const posts = [
   },
   {
     img: blog4,
-    cat: "Civil",
+    cat: "Laboral",
     title: "Derechos laborales básicos que deberías conocer",
     desc: "Marco legal esencial para empleados y empleadores en Argentina.",
     body: [
@@ -669,6 +694,30 @@ const posts = [
       "Derechos básicos: salario mínimo vital y móvil, jornada máxima de 8 horas diarias o 48 semanales, descanso semanal, vacaciones pagas, aguinaldo (SAC), licencias especiales y obra social.",
       "Ante un despido sin causa corresponde una indemnización por antigüedad (Art. 245 LCT), preaviso e integración del mes de despido. Si hubo registración deficiente, se suman multas.",
       "Plazo de prescripción: 2 años desde el hecho que generó el reclamo. No demores — la prueba se vuelve más difícil con el tiempo. Consultá siempre antes de firmar telegramas o acuerdos.",
+    ],
+  },
+  {
+    img: blog1,
+    cat: "Societario",
+    title: "Cuándo y cómo constituir una sociedad",
+    desc: "Claves para estructurar una empresa y proteger a los socios desde el inicio.",
+    body: [
+      "La constitución de una sociedad no es solo un trámite: define responsabilidades, aportes, administración y distribución de utilidades. Elegir el tipo adecuado es clave.",
+      "Las sociedades más frecuentes son la SRL, la SA y la unipersonal. Cada una tiene reglas distintas sobre capital social, asambleas y rendición de cuentas. Contar con estatutos bien redactados evita conflictos futuros entre socios.",
+      "También es fundamental prever mecanismos de salida, disolución y transferencia de participaciones para que la empresa pueda crecer con seguridad.",
+      "El asesoramiento societario anticipa riesgos y optimiza la relación entre socios, clientes y terceros. Consultá antes de firmar acuerdos o iniciar gestiones registrales.",
+    ],
+  },
+  {
+    img: blog3,
+    cat: "Civil",
+    title: "Claves para proteger tus derechos en un contrato civil",
+    desc: "Cómo asegurar acuerdos claros y evitar futuros conflictos entre partes.",
+    body: [
+      "Los contratos civiles deben ser claros en obligaciones, plazos, montos y condiciones de pago. Una redacción sencilla pero precisa reduce el riesgo de malentendidos.",
+      "Es importante incluir cláusulas sobre incumplimiento, penalidades y forma de resolución de conflictos. Así se protege tanto al acreedor como al deudor.",
+      "Antes de firmar, revisá que el contrato refleje exactamente lo acordado: objeto, plazo, garantías y anexos. Si hay dudas, no firmes sin asesoramiento.",
+      "En caso de conflicto, se puede recurrir primero a la mediación o al arbitraje. Contar con un abogado civil permite evaluar la mejor estrategia para hacer valer tus derechos.",
     ],
   },
 ];
@@ -963,6 +1012,7 @@ function Footer() {
                 ["#familia", "Área de Familia"],
                 ["#civil", "Área Civil"],
                 ["#societario", "Derecho Societario"],
+                ["#laboral", "Área Laboral"],
                 ["#honorarios", "Honorarios"],
                 ["#blog", "Blog Jurídico"],
               ].map(([h, l]) => (

@@ -97,6 +97,8 @@ export function ContactForm() {
           <option className="bg-deep" value="Penal">Penal</option>
           <option className="bg-deep" value="Familia">Familia</option>
           <option className="bg-deep" value="Civil">Civil</option>
+          <option className="bg-deep" value="Societario">Societario</option>
+          <option className="bg-deep" value="Laboral">Laboral</option>
           <option className="bg-deep" value="Otro">Otro</option>
         </select>
       </div>

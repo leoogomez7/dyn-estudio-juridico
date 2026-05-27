@@ -15,6 +15,18 @@ const faqs = [
     a: "El tiempo promedio es de 6 a 12 meses, dependiendo de la cantidad de herederos, bienes y eventuales conflictos. Trabajamos para acortar plazos al máximo.",
   },
   {
+    q: "¿Cuándo conviene constituir una sociedad?",
+    a: "Conviene definir la estructura societaria desde el inicio cuando hay varios socios, proyectos comerciales con crecimiento planificado o necesidad de limitar responsabilidades. Asesoramos en la elección de SRL, SA y unipersonales para proteger el capital y las relaciones internas.",
+  },
+  {
+    q: "¿Qué hago si me despiden sin causa?",
+    a: "Si te despiden sin causa, el primer paso es solicitar el telegrama y calcular la indemnización por antigüedad, integración del mes y preaviso. Te ayudamos a reclamar el monto correcto y a negociar acuerdos que eviten futuros conflictos.",
+  },
+  {
+    q: "¿Cómo puedo revisar un contrato antes de firmarlo?",
+    a: "Es recomendable que un abogado revise los contratos civiles antes de firmarlos para detectar cláusulas abusivas, plazos imprecisos o compromisos no deseados. Un análisis previo reduce riesgos y protege tus derechos patrimoniales.",
+  },
+  {
     q: "¿Atienden consultas virtuales?",
     a: "Sí. Brindamos asesoramiento por videollamada en todo el país, con la misma calidad y respaldo que la atención presencial en nuestro estudio.",
   },
