@@ -69,7 +69,6 @@ export function Navbar() {
             </a>
           </nav>
 
-          </nav>
 
           <button
             aria-label="Menu"
