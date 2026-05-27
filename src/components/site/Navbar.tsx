@@ -59,6 +59,16 @@ export function Navbar() {
                 <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
+
+                        {/* BOTÓN AGREGADO PARA PC */}
+            <a
+              href="#asesoramiento"
+              className="ml-2 px-5 py-2.5 rounded-full text-[13px] uppercase tracking-wider font-medium btn-gold transition-all hover:scale-105"
+            >
+              Solicitar Asesoramiento
+            </a>
+          </nav>
+
           </nav>
 
           <button

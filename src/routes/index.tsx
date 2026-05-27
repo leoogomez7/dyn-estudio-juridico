@@ -413,7 +413,7 @@ function Estudio() {
           <div className="reveal">
             <SectionEyebrow>El Estudio</SectionEyebrow>
             <h2 className="font-serif text-4xl sm:text-5xl mt-4 leading-tight">
-              Estrategia, ética y{" "}
+              Estrategia, ética y
               <span className="gradient-text-gold italic">resultados</span>.
             </h2>
             <div className="divider-gold my-6" />
@@ -447,7 +447,7 @@ function Estudio() {
             </div>
 
             <a
-              href="#contacto"
+              href={WA}
               className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium btn-gold"
             >
               Agendar una consulta
