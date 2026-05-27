@@ -459,7 +459,7 @@ function Honorarios() {
     {
       title: "Divorcios y Sucesiones",
       desc: "Trámites de familia con acompañamiento humano y resolución ágil.",
-      bullets: ["Divorcio express", "Sucesiones", "Acuerdos extrajudiciales"],
+      bullets: ["Divorcio", "Sucesiones", "Acuerdos extrajudiciales"],
     },
   ];
   return (
