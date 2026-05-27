@@ -1043,10 +1043,11 @@ function Footer() {
             <div className="text-[11px] uppercase tracking-[0.2em] text-gold/85 mb-4">
               Contacto
             </div>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-gold mt-0.5 shrink-0" />
-                <span>Gaboto 441, Merlo</span>
+                <li className="flex items-start gap-2.5">
+                <Phone className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                <a href={GOOGLE_REVIEWS_URL} className="hover:text-gold transition-colors">
+                  Gaboto 441, Merlo
+                </a>
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="h-4 w-4 text-gold mt-0.5 shrink-0" />
@@ -1070,7 +1071,6 @@ function Footer() {
                 <Clock className="h-4 w-4 text-gold mt-0.5 shrink-0" />
                 <span>Todos los días, las 24 horas</span>
               </li>
-            </ul>
           </div>
         </div>
 
