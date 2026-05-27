@@ -415,7 +415,7 @@ function Estudio() {
             <SectionEyebrow>El Estudio</SectionEyebrow>
             <h2 className="font-serif text-4xl sm:text-5xl mt-4 leading-tight">
               Estrategia, ética y
-              <span className="gradient-text-gold italic">resultados</span>.
+              <span className="gradient-text-gold italic">resultados</span>
             </h2>
             <div className="divider-gold my-6" />
             <p className="text-muted-foreground leading-relaxed mb-5">

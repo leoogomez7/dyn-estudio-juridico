@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 
 const links = [
   { href: "#inicio", label: "Inicio" },
-  { href: "#areas", label: "Especialidades" },
+  { href: "#especialidades", label: "Especialidades" }, // Corregido para que coincida con tu ID
   { href: "#estudio", label: "El Estudio" },
   { href: "#honorarios", label: "Honorarios" },
   { href: "#blog", label: "Blog" },
@@ -15,7 +15,6 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -32,8 +31,8 @@ export function Navbar() {
     >
       <div
         className={`mx-auto max-w-7xl px-4 sm:px-6 transition-all duration-500 ${
-          scrolled
-            ? "glass-strong rounded-2xl border border-white/10"
+          scrolled || open
+            ? "bg-deep border border-white/10 rounded-2xl shadow-2xl" // Sólido y opaco al bajar o abrir menú
             : "bg-transparent"
         }`}
       >
@@ -60,7 +59,7 @@ export function Navbar() {
               </a>
             ))}
 
-                        {/* BOTÓN AGREGADO PARA PC */}
+            {/* BOTÓN PARA PC */}
             <a
               href="#asesoramiento"
               className="ml-2 px-5 py-2.5 rounded-full text-[13px] uppercase tracking-wider font-medium btn-gold transition-all hover:scale-105"
@@ -69,18 +68,18 @@ export function Navbar() {
             </a>
           </nav>
 
-
           <button
             aria-label="Menu"
-            className="lg:hidden p-2 text-gold"
+            className="lg:hidden p-2 text-gold z-50"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
+        {/* MENÚ DESPLEGABLE MÓVIL / ZOOM (100% OPACO) */}
         {open && (
-          <div className="lg:hidden border-t border-white/10 py-4 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="lg:hidden bg-deep border-t border-white/10 mx-[-16px] px-6 py-4 animate-in fade-in slide-in-from-top-2 duration-300 rounded-b-2xl">
             <nav className="flex flex-col gap-1">
               {links.map((l) => (
                 <a
@@ -95,7 +94,7 @@ export function Navbar() {
               <a
                 href="#asesoramiento"
                 onClick={() => setOpen(false)}
-                className="mt-3 text-center px-5 py-3 rounded-full text-sm font-medium btn-gold"
+                className="mt-3 text-center px-5 py-3 rounded-full text-sm font-medium btn-gold block w-full"
               >
                 Solicitar Asesoramiento
               </a>
