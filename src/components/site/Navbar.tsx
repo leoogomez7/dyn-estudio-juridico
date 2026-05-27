@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 
 const links = [
   { href: "#inicio", label: "Inicio" },
-  { href: "#penal", label: "Área Penal" },
-  { href: "#familia", label: "Área de Familia" },
-  { href: "#civil", label: "Área Civil" },
+  { href: "#areas", label: "Especialidades" },
   { href: "#estudio", label: "El Estudio" },
   { href: "#honorarios", label: "Honorarios" },
   { href: "#blog", label: "Blog" },
@@ -17,6 +15,7 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -62,13 +61,6 @@ export function Navbar() {
             ))}
           </nav>
 
-          <a
-            href="#contacto"
-            className="hidden lg:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium btn-gold"
-          >
-            Asesoramiento
-          </a>
-
           <button
             aria-label="Menu"
             className="lg:hidden p-2 text-gold"
@@ -92,7 +84,7 @@ export function Navbar() {
                 </a>
               ))}
               <a
-                href="#contacto"
+                href="#asesoramiento"
                 onClick={() => setOpen(false)}
                 className="mt-3 text-center px-5 py-3 rounded-full text-sm font-medium btn-gold"
               >

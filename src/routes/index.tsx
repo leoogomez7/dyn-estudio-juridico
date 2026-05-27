@@ -178,7 +178,7 @@ function Hero() {
 
           <div className="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a
-              href="#contacto"
+              href="#asesoramiento"
               className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium btn-gold"
             >
               Solicitar Asesoramiento
@@ -310,7 +310,7 @@ const areas = [
 
 function Areas() {
   return (
-    <section className="py-28 relative">
+    <section id="areas" className="py-28 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHead
           eyebrow="Áreas de Especialidad"
@@ -909,7 +909,7 @@ function Contacto() {
           </div>
 
           {/* Form */}
-          <div className="reveal lg:col-span-1 glass-strong rounded-3xl p-8">
+          <div id="asesoramiento" className="reveal lg:col-span-1 glass-strong rounded-3xl p-8">
             <h3 className="font-serif text-2xl mb-1">Solicitar Asesoramiento</h3>
             <p className="text-sm text-muted-foreground mb-6">
               Completá tus datos y te contactamos a la brevedad.
@@ -995,9 +995,16 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid lg:grid-cols-4 gap-10 mb-12">
           <div className="lg:col-span-2">
-            <div className="font-serif text-2xl">
-              <span className="gradient-text-gold">D&N</span> Estudio Jurídico Integral
+            
+            {/* LOGO */}
+            <div className="flex items-center">
+              <img 
+                src="/src/assets/icono.jpeg" 
+                alt="D&N Estudio Jurídico Logo" 
+                className="h-32 w-auto object-contain" 
+              />
             </div>
+
             <p className="mt-4 text-sm text-muted-foreground max-w-md leading-relaxed">
               Firma jurídica de élite con sede en Merlo. Defensa técnica, soluciones
               de familia y asesoramiento civil con estándares premium.
