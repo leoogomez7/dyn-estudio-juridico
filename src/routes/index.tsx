@@ -4,6 +4,7 @@ import {
   Shield,
   Users,
   Scroll,
+  Briefcase,
   Clock,
   CheckCircle2,
   Star,
@@ -267,10 +268,24 @@ const areas = [
     desc: "Asesoramiento estratégico y resolución de litigios complejos.",
     items: [
       "Redacción de contratos",
-      "Derecho societario",
       "Daños y perjuicios",
       "Mediaciones",
       "Conflictos patrimoniales",
+    ],
+  },
+  {
+    id: "societario",
+    icon: Briefcase,
+    title: "Derecho Societario",
+    tag: "Estrategia Corporativa",
+    desc: "Acompañamos a su empresa en cada paso societario con solidez y visión preventiva.",
+    items: [
+      "Constitución de sociedades",
+      "Disolución y liquidación",
+      "Fusiones y adquisiciones",
+      "Reorganización societaria",
+      "Contratos entre socios",
+      "Compliance y gobierno corporativo",
     ],
   },
 ];
@@ -282,7 +297,7 @@ function Areas() {
         <SectionHead
           eyebrow="Áreas de Especialidad"
           title={<>Práctica jurídica <span className="gradient-text-gold italic">de élite</span></>}
-          sub="Tres pilares de práctica, una sola filosofía: excelencia técnica al servicio de cada cliente."
+          sub="Cuatro pilares de práctica, una sola filosofía: excelencia técnica al servicio de cada cliente."
         />
 
         <div className="mt-16 grid lg:grid-cols-3 gap-6">
@@ -947,6 +962,7 @@ function Footer() {
                 ["#penal", "Área Penal"],
                 ["#familia", "Área de Familia"],
                 ["#civil", "Área Civil"],
+                ["#societario", "Derecho Societario"],
                 ["#honorarios", "Honorarios"],
                 ["#blog", "Blog Jurídico"],
               ].map(([h, l]) => (
