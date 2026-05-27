@@ -153,13 +153,14 @@ function Hero() {
             </span>
           </div>
 
-          <h1 className="reveal font-serif text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
+          <h1 className="reveal font-serif text-5xl sm:text-7xl lg:text-8xl leading-normal tracking-tight">
             <span className="block text-foreground/90">D&N</span>
             <span className="block gradient-text-gold mt-2">Estudio Jurídico</span>
             <span className="block text-foreground/85 text-3xl sm:text-4xl lg:text-5xl mt-4 font-serif italic">
               Integral
             </span>
           </h1>
+
 
           <div className="reveal flex items-center justify-center my-8">
             <span className="divider-gold" />
