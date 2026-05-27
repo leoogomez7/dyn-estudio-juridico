@@ -253,7 +253,7 @@ const areas = [
     tag: "Soluciones Humanas",
     desc: "Soluciones rápidas y humanas para conflictos familiares.",
     items: [
-      "Divorcios express",
+      "Divorcios",
       "Cuota alimentaria",
       "Sucesiones y herencias",
       "Régimen de visitas",
@@ -267,6 +267,7 @@ const areas = [
     desc: "Asesoramiento estratégico y resolución de litigios complejos.",
     items: [
       "Redacción de contratos",
+      "Derecho societario",
       "Daños y perjuicios",
       "Mediaciones",
       "Conflictos patrimoniales",
