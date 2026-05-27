@@ -15,14 +15,22 @@ const DEST_EMAIL = "leorgomez7@gmail.com";
 
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
+  
+  // Estado exclusivo para capturar el texto y romper el bug del bloqueo
+  const [textoMensaje, setTextoMensaje] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
+    
+    // Forzamos la inyección del texto capturado por el estado en el FormData
+    fd.set("mensaje", textoMensaje);
+    
     const parsed = schema.safeParse(Object.fromEntries(fd));
     
     if (!parsed.success) {
+      // Extrae el mensaje de error exacto generado por Zod
       toast.error(parsed.error.issues[0]?.message ?? "Revisá los datos");
       return;
     }
@@ -31,7 +39,6 @@ export function ContactForm() {
     const { nombre, telefono, email, especialidad, mensaje } = parsed.data;
 
     try {
-      // FormSubmit Ajax — Envío directo por email compatible con Vite y Vercel
       const body = new FormData();
       body.append("Nombre", nombre);
       body.append("Email", email);
@@ -39,7 +46,7 @@ export function ContactForm() {
       body.append("Área de Especialidad", especialidad);
       body.append("Consulta", mensaje);
       body.append("_subject", `Nueva consulta — ${especialidad} — ${nombre}`);
-      body.append("_captcha", "false"); // Desactiva el captcha para que no interrumpa al cliente
+      body.append("_captcha", "false");
 
       const res = await fetch(`https://formsubmit.co{DEST_EMAIL}`, {
         method: "POST",
@@ -51,9 +58,9 @@ export function ContactForm() {
       
       toast.success("Consulta enviada. Te respondemos a la brevedad.");
       form.reset();
+      setTextoMensaje(""); // Limpiamos el editor
     } catch (error) {
       console.error(error);
-      // Plan de respaldo si falla internet: abre el correo nativo del cliente
       const subject = encodeURIComponent(`Consulta web — ${especialidad}`);
       const bodyTxt = encodeURIComponent(
         `Nombre: ${nombre}\nTeléfono: ${telefono}\nEmail: ${email}\nÁrea: ${especialidad}\n\n${mensaje}`,
@@ -115,6 +122,8 @@ export function ContactForm() {
           rows={4}
           placeholder="Contanos brevemente tu caso..."
           className={inputCls}
+          value={textoMensaje}
+          onChange={(e) => setTextoMensaje(e.target.value)} // Vinculación en tiempo real
           required
         />
       </div>
@@ -127,7 +136,7 @@ export function ContactForm() {
         {!loading && <ChevronRight className="h-4 w-4" />}
       </button>
       <p className="text-[11px] text-muted-foreground/80 text-center">
-        Tu información es treated con absoluta confidencialidad.
+        Tu información es tratada con absoluta confidencialidad.
       </p>
     </form>
   );
