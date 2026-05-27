@@ -999,7 +999,7 @@ function Footer() {
             {/* LOGO */}
             <div className="flex items-center">
               <img 
-                src="/src/assets/icono.jpeg" 
+                src="/assets/icono.jpeg" 
                 alt="D&N Estudio Jurídico Logo" 
                 className="h-32 w-auto object-contain" 
               />
