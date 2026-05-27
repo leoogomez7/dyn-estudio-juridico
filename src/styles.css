@@ -115,6 +115,8 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    width: 649px;
+    height: 79px;
   }
   .glass {
     background: linear-gradient(135deg,
@@ -182,14 +184,6 @@
   @keyframes float-slow {
     0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
     50% { transform: translateY(-30px) translateX(15px); opacity: 1; }
-  }
-  .particle {
-    position: absolute;
-    border-radius: 9999px;
-    background: var(--gold);
-    filter: blur(1px);
-    animation: float-slow 9s ease-in-out infinite;
-    opacity: 0.5;
   }
   .btn-gold {
     background: linear-gradient(135deg, oklch(0.88 0.13 88), oklch(0.76 0.16 80));

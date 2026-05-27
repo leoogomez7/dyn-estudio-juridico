@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Scale } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.jpeg";
 
 const links = [
   { href: "#inicio", label: "Inicio" },
@@ -39,8 +40,8 @@ export function Navbar() {
       >
         <div className="flex items-center justify-between h-16">
           <a href="#inicio" className="flex items-center gap-2.5 group">
-            <span className="grid place-items-center h-10 w-10 rounded-lg border border-gold/30 bg-gradient-to-br from-deep-2 to-deep glow-soft">
-              <Scale className="h-5 w-5 text-gold" />
+            <span className="grid place-items-center h-10 w-10 rounded-lg border border-gold/30 bg-gradient-to-br from-deep-2 to-deep glow-soft overflow-hidden">
+              <img src={logo} alt="Logo D&N Estudio Jurídico" className="h-full w-full object-cover" />
             </span>
             <span className="font-serif text-base sm:text-lg tracking-tight">
               <span className="gradient-text-gold">D&N</span>

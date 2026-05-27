@@ -32,8 +32,7 @@ import { ContactForm } from "@/components/site/ContactForm";
 import { useReveal } from "@/hooks/use-reveal";
 import { Toaster } from "@/components/ui/sonner";
 
-import heroBg from "@/assets/hero-bg.jpg";
-import lawyerImg from "@/assets/lawyer-portrait.jpg";
+import lawyerImg from "@/assets/abogada.jpeg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -63,7 +62,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Protección total, resultados contundentes. Soluciones jurídicas de élite en derecho penal, familia y civil.",
+          "Derecho con compromiso Soluciones con estrategía.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_AR" },
@@ -134,31 +133,11 @@ function Hero() {
       <div
         className="absolute inset-0 -z-10"
         style={{
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          background: "radial-gradient(circle at 15% 20%, rgba(255,205,100,0.12), transparent 24%), radial-gradient(circle at 85% 15%, rgba(255,215,120,0.08), transparent 26%), linear-gradient(180deg, #050816 0%, #081022 100%)",
         }}
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep/85 via-deep/75 to-deep" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_30%,oklch(0.3_0.07_252/0.55),transparent_70%)]" />
-
-      {/* Floating particles */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        {Array.from({ length: 14 }).map((_, i) => (
-          <span
-            key={i}
-            className="particle"
-            style={{
-              top: `${(i * 37) % 100}%`,
-              left: `${(i * 53) % 100}%`,
-              width: `${4 + (i % 4) * 2}px`,
-              height: `${4 + (i % 4) * 2}px`,
-              animationDelay: `${(i % 9) * 0.6}s`,
-              animationDuration: `${7 + (i % 5)}s`,
-            }}
-          />
-        ))}
-      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 w-full">
         <div className="max-w-4xl mx-auto text-center">
@@ -184,10 +163,10 @@ function Hero() {
           <p className="reveal text-base sm:text-lg text-foreground/80 max-w-2xl mx-auto">
             <span className="text-gold font-medium">Dra. Moloñe Carla Antonella</span>
             <span className="block mt-3 font-serif italic text-foreground/85 text-lg sm:text-xl">
-              "Protección total, resultados contundentes."
+              "Derecho con compromiso"
             </span>
             <span className="block mt-1 text-sm text-muted-foreground tracking-wide">
-              Soluciones jurídicas de élite.
+              Soluciones con estrategía.
             </span>
           </p>
 
@@ -226,7 +205,7 @@ function Hero() {
 function Trust() {
   const items = [
     { icon: Lock, label: "Confidencialidad absoluta" },
-    { icon: HeartHandshake, label: "Atención personalizada" },
+    { icon: Clock, label: "Atención 24/7" },
     { icon: Zap, label: "Respuestas rápidas" },
     { icon: Award, label: "Compromiso profesional" },
   ];
@@ -375,7 +354,7 @@ function Estudio() {
               />
               <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-deep via-deep/70 to-transparent">
                 <div className="text-xs uppercase tracking-widest text-gold/90">
-                  Directora
+                  Abogada
                 </div>
                 <div className="font-serif text-xl mt-1">
                   Dra. Moloñe Carla Antonella
@@ -384,13 +363,13 @@ function Estudio() {
             </div>
             <div className="absolute -bottom-6 -right-6 glass-strong rounded-2xl p-5 hidden sm:block">
               <div className="flex items-center gap-3">
-                <Award className="h-7 w-7 text-gold" />
+                <Clock className="h-7 w-7 text-gold" />
                 <div>
                   <div className="font-serif text-2xl gradient-text-gold leading-none">
-                    <Counter to={15} suffix="+" />
+                    <Counter to={24} suffix=" horas" />
                   </div>
                   <div className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">
-                    Años de trayectoria
+                    7 días atendiendo
                   </div>
                 </div>
               </div>
@@ -531,8 +510,8 @@ function Schedule() {
                 Horarios de atención
               </div>
               <div className="font-serif text-2xl sm:text-3xl mt-2">
-                Lunes a Viernes ·{" "}
-                <span className="gradient-text-gold">9:00 a 18:00 hs</span>
+                Los 7 días de la semana ·{" "}
+                <span className="gradient-text-gold">Las 24 hs del día</span>
               </div>
               <p className="text-sm text-muted-foreground mt-2">
                 Atención presencial y virtual con cita previa.
@@ -599,33 +578,6 @@ function UrgenciaBanner() {
 
 /* ---------------------------- OPINIONES ---------------------------- */
 
-const reviews = [
-  {
-    name: "Sofía R.",
-    role: "Reseña Google · Estudio Jurídico",
-    rating: 5,
-    text: "Excelente atención de la Dra. Moloñe. Profesional, clara y empática. Resolvió mi caso de familia con rapidez y total transparencia.",
-  },
-  {
-    name: "Jorge L.",
-    role: "Reseña Google · Estudio Jurídico",
-    rating: 5,
-    text: "Asesoramiento de primer nivel en materia penal. Disponibilidad inmediata y una estrategia muy bien planteada. 100% recomendable.",
-  },
-  {
-    name: "María C.",
-    role: "Reseña Google · Estudio Jurídico",
-    rating: 5,
-    text: "Tramité mi sucesión con el estudio y la experiencia fue impecable. Comunicación constante y plazos cumplidos.",
-  },
-  {
-    name: "Federico A.",
-    role: "Reseña Google · Estudio Jurídico",
-    rating: 5,
-    text: "Trato humano y profesionalismo absoluto. Te explican cada paso y se nota el compromiso con el cliente.",
-  },
-];
-
 function Opiniones() {
   return (
     <section id="opiniones" className="py-28">
@@ -635,33 +587,6 @@ function Opiniones() {
           title={<>Lo que dicen nuestros <span className="gradient-text-gold italic">clientes</span></>}
           sub="Reseñas reales del Estudio Jurídico Integral — Dra. Moloñe (D&N) en Google."
         />
-
-        <div className="mt-16 grid md:grid-cols-2 gap-6">
-          {reviews.map((r, i) => (
-            <figure
-              key={i}
-              className="reveal glass rounded-3xl p-8 hover-lift relative"
-            >
-              <div className="flex items-center gap-1 mb-5">
-                {Array.from({ length: r.rating }).map((_, j) => (
-                  <Star key={j} className="h-4 w-4 fill-gold text-gold" />
-                ))}
-              </div>
-              <blockquote className="font-serif text-lg sm:text-xl italic text-foreground/90 leading-relaxed">
-                "{r.text}"
-              </blockquote>
-              <figcaption className="mt-6 flex items-center gap-3">
-                <span className="grid place-items-center h-10 w-10 rounded-full bg-gold/15 border border-gold/30 text-gold font-serif">
-                  {r.name[0]}
-                </span>
-                <div>
-                  <div className="text-sm font-medium">{r.name}</div>
-                  <div className="text-xs text-muted-foreground">{r.role}</div>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
 
         <div className="mt-10 text-center">
           <a
@@ -903,40 +828,16 @@ function Contacto() {
             <InfoCard
               icon={Clock}
               label="Horario"
-              value="Lun a Vie · 9:00 a 18:00 hs"
+              value="Todos los días, 24 horas"
             />
-            <div className="glass rounded-2xl p-5 flex items-center gap-4">
-              <span className="text-sm text-foreground/85">Seguinos</span>
-              <div className="flex gap-2">
-                <a
-                  aria-label="Instagram"
-                  href={IG_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-10 w-10 grid place-items-center rounded-full glass-strong text-foreground/85 hover:text-gold transition-colors"
-                >
-                  <Instagram className="h-4 w-4" />
-                </a>
-                <a
-                  aria-label="WhatsApp"
-                  href={WA}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-10 w-10 grid place-items-center rounded-full glass-strong text-foreground/85 hover:text-gold transition-colors"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                </a>
-                <a
-                  aria-label="Maps"
-                  href={mapsLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-10 w-10 grid place-items-center rounded-full glass-strong text-foreground/85 hover:text-gold transition-colors"
-                >
-                  <MapPin className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
+            <InfoCard
+              icon={Instagram}
+              label="Instagram"
+              value="@dra.moloneantonella"
+              ctaLabel="Seguir"
+              href={IG_URL}
+              external
+            />
           </div>
 
           {/* Form */}
@@ -1089,7 +990,7 @@ function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="h-4 w-4 text-gold mt-0.5 shrink-0" />
-                <span>Lun a Vie · 9 a 18 hs</span>
+                <span>Todos los días, las 24 horas</span>
               </li>
             </ul>
           </div>
