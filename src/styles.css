@@ -128,7 +128,7 @@
 /* Solo para PC (pantallas mayores a 768px) */
 @media (min-width: 768px) {
   .gradient-text-gold {
-    height: 9%; 
+    height: 90%; 
   }
 }
 
