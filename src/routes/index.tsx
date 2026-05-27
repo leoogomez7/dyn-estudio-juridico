@@ -35,10 +35,13 @@ import { useReveal } from "@/hooks/use-reveal";
 import { Toaster } from "@/components/ui/sonner";
 
 import lawyerImg from "@/assets/abogada.jpeg";
+import heroBg from "@/assets/hero-bg.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
 import blog4 from "@/assets/blog-4.jpg";
+import blog5 from "@/assets/blog-5.jpg";
+import blog6 from "@/assets/blog-6.jpg";
 
 const WA = "https://wa.me/5491161117841?text=Hola,%20quisiera%20coordinar%20cita";
 const TEL = "tel:+5491161117841";
@@ -685,7 +688,7 @@ const posts = [
     ],
   },
   {
-    img: blog4,
+    img: blog5,
     cat: "Laboral",
     title: "Derechos laborales básicos que deberías conocer",
     desc: "Marco legal esencial para empleados y empleadores en Argentina.",
@@ -697,7 +700,7 @@ const posts = [
     ],
   },
   {
-    img: blog1,
+    img: blog6,
     cat: "Societario",
     title: "Cuándo y cómo constituir una sociedad",
     desc: "Claves para estructurar una empresa y proteger a los socios desde el inicio.",
@@ -709,7 +712,7 @@ const posts = [
     ],
   },
   {
-    img: blog3,
+    img: blog4,
     cat: "Civil",
     title: "Claves para proteger tus derechos en un contrato civil",
     desc: "Cómo asegurar acuerdos claros y evitar futuros conflictos entre partes.",
