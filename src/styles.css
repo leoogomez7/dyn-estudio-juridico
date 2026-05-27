@@ -120,15 +120,15 @@
     height: auto;
 
     /* Solución al corte de la J y letras con colas */
-    padding-left: 0.25em;
-    padding-right: 0.25em;
+    padding-left: 0.35em;
+    padding-right: 0.35em;
     box-sizing: border-box;
 }
 
 /* Solo para PC (pantallas mayores a 768px) */
 @media (min-width: 768px) {
   .gradient-text-gold {
-    height: 90px; 
+    height: 9%; 
   }
 }
 
