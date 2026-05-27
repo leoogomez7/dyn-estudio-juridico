@@ -115,12 +115,23 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    
-    /* Ocupa todo el ancho disponible */
     width: 100%;
-    height: auto;
     display: block;
+    height: auto;
+
+    /* Solución al corte de la J y letras con colas */
+    padding-left: 0.15em;
+    padding-right: 0.15em;
+    box-sizing: border-box;
 }
+
+/* Solo para PC (pantallas mayores a 768px) */
+@media (min-width: 768px) {
+  .gradient-text-gold {
+    height: 79px; 
+  }
+}
+
 
   .glass {
     background: linear-gradient(135deg,
