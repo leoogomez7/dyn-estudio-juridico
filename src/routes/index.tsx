@@ -210,7 +210,7 @@ function Hero() {
 
 function Trust() {
   const items = [
-    { icon: Lock, label: "Confidencialidad absoluta" },
+    { icon: Lock, label: "Privacidad absoluta" },
     { icon: Clock, label: "Atención 24/7" },
     { icon: Zap, label: "Respuestas rápidas" },
     { icon: Award, label: "Compromiso profesional" },
