@@ -162,40 +162,62 @@ export function ContactForm() {
           Especialidad
         </label>
 
-        <select
-          name="especialidad"
-          defaultValue=""
-          className={INPUT_CLS}
-          required
-        >
-          <option value="" disabled>
-            Seleccionar área
-          </option>
+            <select
+              name="especialidad"
+              defaultValue=""
+              className={`${INPUT_CLS} bg-[#111111] text-white`}
+              required
+            >
+              <option
+                value=""
+                disabled
+                className="bg-[#111111] text-gray-400"
+              >
+                Seleccionar área
+              </option>
 
-          <option value="Penal">
-            Penal
-          </option>
+              <option
+                value="Penal"
+                className="bg-[#111111] text-white"
+              >
+                Penal
+              </option>
 
-          <option value="Familia">
-            Familia
-          </option>
+              <option
+                value="Familia"
+                className="bg-[#111111] text-white"
+              >
+                Familia
+              </option>
 
-          <option value="Civil">
-            Civil
-          </option>
+              <option
+                value="Civil"
+                className="bg-[#111111] text-white"
+              >
+                Civil
+              </option>
 
-          <option value="Societario">
-            Societario
-          </option>
+              <option
+                value="Societario"
+                className="bg-[#111111] text-white"
+              >
+                Societario
+              </option>
 
-          <option value="Laboral">
-            Laboral
-          </option>
+              <option
+                value="Laboral"
+                className="bg-[#111111] text-white"
+              >
+                Laboral
+              </option>
 
-          <option value="Otro">
-            Otro
-          </option>
-        </select>
+              <option
+                value="Otro"
+                className="bg-[#111111] text-white"
+              >
+                Otro
+              </option>
+            </select>
       </div>
 
       <div>
