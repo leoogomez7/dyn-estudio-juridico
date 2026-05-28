@@ -12,6 +12,7 @@ const schema = z.object({
 });
 
 const DEST_EMAIL = "leorgomez7@gmail.com";
+const INPUT_CLS = "w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-gold/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_color-mix(in_oklab,var(--gold)_15%,transparent)]";
 
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,8 @@ export function ContactForm() {
     const parsed = schema.safeParse(Object.fromEntries(fd));
     
     if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message ?? "Revisá los datos");
+      const errorMsg = parsed.error.issues[0]?.message ?? "Revisá los datos";
+      toast.error(errorMsg);
       return;
     }
     
@@ -68,9 +70,6 @@ export function ContactForm() {
     }
   }
 
-  const inputCls =
-    "w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-gold/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_color-mix(in_oklab,var(--gold)_15%,transparent)]";
-
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="grid sm:grid-cols-2 gap-4">
@@ -78,26 +77,26 @@ export function ContactForm() {
           <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
             Nombre
           </label>
-          <input name="nombre" placeholder="Tu nombre completo" className={inputCls} required />
+          <input name="nombre" placeholder="Tu nombre completo" className={INPUT_CLS} required />
         </div>
         <div>
           <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
             Teléfono
           </label>
-          <input name="telefono" placeholder="+54 9 11 ..." className={inputCls} required />
+          <input name="telefono" placeholder="+54 9 11 ..." className={INPUT_CLS} required />
         </div>
       </div>
       <div>
         <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
           Email
         </label>
-        <input name="email" type="email" placeholder="tu@email.com" className={inputCls} required />
+        <input name="email" type="email" placeholder="tu@email.com" className={INPUT_CLS} required />
       </div>
       <div>
         <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
           Especialidad
         </label>
-        <select name="especialidad" defaultValue="" className={inputCls} required>
+        <select name="especialidad" defaultValue="" className={INPUT_CLS} required>
           <option value="" disabled>
             Seleccionar área
           </option>
@@ -117,7 +116,7 @@ export function ContactForm() {
           name="mensaje"
           rows={4}
           placeholder="Contanos brevemente tu caso..."
-          className={inputCls}
+          className={INPUT_CLS}
           value={textoMensaje}
           onChange={(e) => setTextoMensaje(e.target.value)}
           required
