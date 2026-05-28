@@ -162,59 +162,41 @@ export function ContactForm() {
           Especialidad
         </label>
 
-            <select
+                        <select
               name="especialidad"
               defaultValue=""
-              className={`${INPUT_CLS} bg-[#111111] text-white`}
+              className={`${INPUT_CLS} bg-deep text-white`}
               required
             >
               <option
                 value=""
                 disabled
-                className="bg-[#111111] text-gray-400"
+                className="bg-deep text-muted-foreground"
               >
                 Seleccionar área
               </option>
 
-              <option
-                value="Penal"
-                className="bg-[#111111] text-white"
-              >
+              <option value="Penal" className="bg-deep text-white">
                 Penal
               </option>
 
-              <option
-                value="Familia"
-                className="bg-[#111111] text-white"
-              >
+              <option value="Familia" className="bg-deep text-white">
                 Familia
               </option>
 
-              <option
-                value="Civil"
-                className="bg-[#111111] text-white"
-              >
+              <option value="Civil" className="bg-deep text-white">
                 Civil
               </option>
 
-              <option
-                value="Societario"
-                className="bg-[#111111] text-white"
-              >
+              <option value="Societario" className="bg-deep text-white">
                 Societario
               </option>
 
-              <option
-                value="Laboral"
-                className="bg-[#111111] text-white"
-              >
+              <option value="Laboral" className="bg-deep text-white">
                 Laboral
               </option>
 
-              <option
-                value="Otro"
-                className="bg-[#111111] text-white"
-              >
+              <option value="Otro" className="bg-deep text-white">
                 Otro
               </option>
             </select>
