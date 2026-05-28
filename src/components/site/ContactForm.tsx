@@ -5,17 +5,17 @@ import { toast } from "sonner";
 import { ChevronRight } from "lucide-react";
 
 const schema = z.object({
-  nombre: z.string().trim().min(2),
-  telefono: z.string().trim().min(6),
-  email: z.string().trim().email(),
-  especialidad: z.string().min(1),
-  mensaje: z.string().trim().min(10),
+  nombre: z.string().trim().min(2, "Ingresá tu nombre"),
+  telefono: z.string().trim().min(6, "Teléfono inválido"),
+  email: z.string().trim().email("Email inválido"),
+  especialidad: z.string().min(1, "Seleccioná un área"),
+  mensaje: z.string().trim().min(10, "Contanos brevemente"),
 });
 
 const DEST_EMAIL = "leorgomez7@gmail.com";
 
 const INPUT_CLS =
-  "w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-foreground";
+  "w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-gold/60 focus:bg-white/[0.06]";
 
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ export function ContactForm() {
 
   async function onSubmit(
     e: FormEvent<HTMLFormElement>
-  ) {
+  ): Promise<void> {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -38,7 +38,12 @@ export function ContactForm() {
     );
 
     if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message || "Error");
+      const firstIssue = parsed.error.issues[0];
+
+      toast.error(
+        firstIssue?.message || "Revisá los datos"
+      );
+
       return;
     }
 
@@ -56,17 +61,21 @@ export function ContactForm() {
       const body = new FormData();
 
       body.append("Nombre", nombre);
-      body.append("Email", email);
       body.append("Telefono", telefono);
-      body.append("Area", especialidad);
+      body.append("Email", email);
+      body.append("Especialidad", especialidad);
       body.append("Consulta", mensaje);
 
       body.append(
         "_subject",
-        `Nueva consulta - ${especialidad}`
+        `Nueva consulta - ${especialidad} - ${nombre}`
       );
 
       body.append("_captcha", "false");
+
+      body.append("_template", "table");
+
+      body.append("_next", window.location.href);
 
       const res = await fetch(
         `https://formsubmit.co/${DEST_EMAIL}`,
@@ -80,10 +89,12 @@ export function ContactForm() {
       );
 
       if (!res.ok) {
-        throw new Error("Send failed");
+        throw new Error("Error enviando formulario");
       }
 
-      toast.success("Consulta enviada");
+      toast.success(
+        "Consulta enviada correctamente"
+      );
 
       form.reset();
 
@@ -91,73 +102,138 @@ export function ContactForm() {
     } catch (error) {
       console.error(error);
 
-      toast.error("No se pudo enviar");
+      toast.error(
+        "No se pudo enviar la consulta"
+      );
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <input
-        name="nombre"
-        placeholder="Nombre"
-        className={INPUT_CLS}
-        required
-      />
+    <form
+      onSubmit={onSubmit}
+      className="space-y-4"
+    >
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
+            Nombre
+          </label>
 
-      <input
-        name="telefono"
-        placeholder="Telefono"
-        className={INPUT_CLS}
-        required
-      />
+          <input
+            name="nombre"
+            placeholder="Tu nombre completo"
+            className={INPUT_CLS}
+            required
+          />
+        </div>
 
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        className={INPUT_CLS}
-        required
-      />
+        <div>
+          <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
+            Telefono
+          </label>
 
-      <select
-        name="especialidad"
-        defaultValue=""
-        className={INPUT_CLS}
-        required
-      >
-        <option value="" disabled>
-          Seleccionar
-        </option>
+          <input
+            name="telefono"
+            placeholder="+54 9 11 ..."
+            className={INPUT_CLS}
+            required
+          />
+        </div>
+      </div>
 
-        <option value="Penal">Penal</option>
-        <option value="Familia">Familia</option>
-        <option value="Civil">Civil</option>
-      </select>
+      <div>
+        <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
+          Email
+        </label>
 
-      <textarea
-        name="mensaje"
-        rows={4}
-        value={textoMensaje}
-        onChange={(e) =>
-          setTextoMensaje(e.target.value)
-        }
-        className={INPUT_CLS}
-        placeholder="Consulta"
-        required
-      />
+        <input
+          name="email"
+          type="email"
+          placeholder="tu@email.com"
+          className={INPUT_CLS}
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
+          Especialidad
+        </label>
+
+        <select
+          name="especialidad"
+          defaultValue=""
+          className={INPUT_CLS}
+          required
+        >
+          <option value="" disabled>
+            Seleccionar área
+          </option>
+
+          <option value="Penal">
+            Penal
+          </option>
+
+          <option value="Familia">
+            Familia
+          </option>
+
+          <option value="Civil">
+            Civil
+          </option>
+
+          <option value="Societario">
+            Societario
+          </option>
+
+          <option value="Laboral">
+            Laboral
+          </option>
+
+          <option value="Otro">
+            Otro
+          </option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
+          Consulta
+        </label>
+
+        <textarea
+          name="mensaje"
+          rows={4}
+          placeholder="Contanos brevemente tu caso..."
+          className={INPUT_CLS}
+          value={textoMensaje}
+          onChange={(e) =>
+            setTextoMensaje(e.target.value)
+          }
+          required
+        />
+      </div>
 
       <button
         type="submit"
         disabled={loading}
+        className="w-full px-6 py-3.5 rounded-full font-medium btn-gold disabled:opacity-60 flex items-center justify-center gap-2"
       >
-        {loading ? "Enviando..." : "Enviar"}
+        {loading
+          ? "Enviando..."
+          : "Enviar consulta"}
 
         {!loading && (
           <ChevronRight className="h-4 w-4" />
         )}
       </button>
+
+      <p className="text-[11px] text-muted-foreground/80 text-center">
+        Tu información es tratada con absoluta
+        confidencialidad.
+      </p>
     </form>
   );
 }
