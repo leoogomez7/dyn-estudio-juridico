@@ -1,26 +1,30 @@
 import { useState } from "react";
+import type { FormEvent } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { ChevronRight } from "lucide-react";
 
 const schema = z.object({
-  nombre: z.string().trim().min(2, "Ingresá tu nombre").max(80),
-  telefono: z.string().trim().min(6, "Teléfono inválido").max(30),
-  email: z.string().trim().email("Email inválido").max(120),
-  especialidad: z.string().min(1, "Seleccioná un área"),
-  mensaje: z.string().trim().min(10, "Contanos brevemente").max(1000),
+  nombre: z.string().trim().min(2),
+  telefono: z.string().trim().min(6),
+  email: z.string().trim().email(),
+  especialidad: z.string().min(1),
+  mensaje: z.string().trim().min(10),
 });
 
 const DEST_EMAIL = "leorgomez7@gmail.com";
 
 const INPUT_CLS =
-  "w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-gold/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_color-mix(in_oklab,var(--gold)_15%,transparent)]";
+  "w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-foreground";
 
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
+
   const [textoMensaje, setTextoMensaje] = useState("");
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(
+    e: FormEvent<HTMLFormElement>
+  ) {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -29,17 +33,12 @@ export function ContactForm() {
 
     fd.set("mensaje", textoMensaje);
 
-    const parsed = schema.safeParse(Object.fromEntries(fd));
+    const parsed = schema.safeParse(
+      Object.fromEntries(fd.entries())
+    );
 
     if (!parsed.success) {
-      const firstIssue = parsed.error.issues[0];
-
-      const errorMsg = firstIssue
-        ? firstIssue.message
-        : "Revisá los datos";
-
-      toast.error(errorMsg);
-
+      toast.error(parsed.error.issues[0]?.message || "Error");
       return;
     }
 
@@ -58,13 +57,13 @@ export function ContactForm() {
 
       body.append("Nombre", nombre);
       body.append("Email", email);
-      body.append("Teléfono", telefono);
-      body.append("Área de Especialidad", especialidad);
+      body.append("Telefono", telefono);
+      body.append("Area", especialidad);
       body.append("Consulta", mensaje);
 
       body.append(
         "_subject",
-        `Nueva consulta — ${especialidad} — ${nombre}`
+        `Nueva consulta - ${especialidad}`
       );
 
       body.append("_captcha", "false");
@@ -84,9 +83,7 @@ export function ContactForm() {
         throw new Error("Send failed");
       }
 
-      toast.success(
-        "Consulta enviada. Te respondemos a la brevedad."
-      );
+      toast.success("Consulta enviada");
 
       form.reset();
 
@@ -94,24 +91,7 @@ export function ContactForm() {
     } catch (error) {
       console.error(error);
 
-      const subject = encodeURIComponent(
-        `Consulta web — ${especialidad}`
-      );
-
-      const bodyTxt = encodeURIComponent(
-        `Nombre: ${nombre}
-Teléfono: ${telefono}
-Email: ${email}
-Área: ${especialidad}
-
-${mensaje}`
-      );
-
-      window.location.href = `mailto:${DEST_EMAIL}?subject=${subject}&body=${bodyTxt}`;
-
-      toast.message(
-        "Abrimos tu correo para completar el envío."
-      );
+      toast.error("No se pudo enviar");
     } finally {
       setLoading(false);
     }
@@ -119,118 +99,65 @@ ${mensaje}`
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
-            Nombre
-          </label>
+      <input
+        name="nombre"
+        placeholder="Nombre"
+        className={INPUT_CLS}
+        required
+      />
 
-          <input
-            name="nombre"
-            placeholder="Tu nombre completo"
-            className={INPUT_CLS}
-            required
-          />
-        </div>
+      <input
+        name="telefono"
+        placeholder="Telefono"
+        className={INPUT_CLS}
+        required
+      />
 
-        <div>
-          <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
-            Teléfono
-          </label>
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        className={INPUT_CLS}
+        required
+      />
 
-          <input
-            name="telefono"
-            placeholder="+54 9 11 ..."
-            className={INPUT_CLS}
-            required
-          />
-        </div>
-      </div>
+      <select
+        name="especialidad"
+        defaultValue=""
+        className={INPUT_CLS}
+        required
+      >
+        <option value="" disabled>
+          Seleccionar
+        </option>
 
-      <div>
-        <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
-          Email
-        </label>
+        <option value="Penal">Penal</option>
+        <option value="Familia">Familia</option>
+        <option value="Civil">Civil</option>
+      </select>
 
-        <input
-          name="email"
-          type="email"
-          placeholder="tu@email.com"
-          className={INPUT_CLS}
-          required
-        />
-      </div>
-
-      <div>
-        <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
-          Especialidad
-        </label>
-
-        <select
-          name="especialidad"
-          defaultValue=""
-          className={INPUT_CLS}
-          required
-        >
-          <option value="" disabled>
-            Seleccionar área
-          </option>
-
-          <option className="bg-deep" value="Penal">
-            Penal
-          </option>
-
-          <option className="bg-deep" value="Familia">
-            Familia
-          </option>
-
-          <option className="bg-deep" value="Civil">
-            Civil
-          </option>
-
-          <option className="bg-deep" value="Societario">
-            Societario
-          </option>
-
-          <option className="bg-deep" value="Laboral">
-            Laboral
-          </option>
-
-          <option className="bg-deep" value="Otro">
-            Otro
-          </option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
-          Consulta
-        </label>
-
-        <textarea
-          name="mensaje"
-          rows={4}
-          placeholder="Contanos brevemente tu caso..."
-          className={INPUT_CLS}
-          value={textoMensaje}
-          onChange={(e) => setTextoMensaje(e.target.value)}
-          required
-        />
-      </div>
+      <textarea
+        name="mensaje"
+        rows={4}
+        value={textoMensaje}
+        onChange={(e) =>
+          setTextoMensaje(e.target.value)
+        }
+        className={INPUT_CLS}
+        placeholder="Consulta"
+        required
+      />
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full px-6 py-3.5 rounded-full font-medium btn-gold disabled:opacity-60 flex items-center justify-center gap-2"
       >
-        {loading ? "Enviando..." : "Enviar consulta"}
+        {loading ? "Enviando..." : "Enviar"}
 
-        {!loading && <ChevronRight className="h-4 w-4" />}
+        {!loading && (
+          <ChevronRight className="h-4 w-4" />
+        )}
       </button>
-
-      <p className="text-[11px] text-muted-foreground/80 text-center">
-        Tu información es tratada con absoluta confidencialidad.
-      </p>
     </form>
   );
 }
