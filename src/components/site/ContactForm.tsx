@@ -28,7 +28,9 @@ export function ContactForm() {
     const parsed = schema.safeParse(Object.fromEntries(fd));
     
     if (!parsed.success) {
-      const errorMsg = parsed.error.issues[0]?.message ?? "Revisá los datos";
+      // Solución al error de tipado estricto: accedemos de forma segura al array de errores
+      const firstIssue = parsed.error.issues[0];
+      const errorMsg = firstIssue ? firstIssue.message : "Revisá los datos";
       toast.error(errorMsg);
       return;
     }
