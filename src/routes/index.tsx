@@ -430,7 +430,7 @@ function Estudio() {
               cerca tuyo, cuando más lo necesitás.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Estudio jurídico ubicado en <span className="text-foreground/90">Merlo (Gaboto)</span>,
+              Estudio jurídico ubicado en <span className="text-foreground/90">Merlo (Gaboto).</span>
             </p>
 
             <div className="grid sm:grid-cols-2 gap-3">

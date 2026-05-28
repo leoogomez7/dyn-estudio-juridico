@@ -12,7 +12,7 @@ const schema = z.object({
   mensaje: z.string().trim().min(10, "Contanos brevemente"),
 });
 
-const DEST_EMAIL = "1131165252a@gmail.com";
+const DEST_EMAIL = "campeonleonardo@hotmail.com";
 
 const INPUT_CLS =
   "w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-gold/60 focus:bg-white/[0.06]";
