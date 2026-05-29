@@ -10,10 +10,23 @@
 
 El proyecto destaca por utilizar herramientas de última generación en el ecosistema de JavaScript/TypeScript, optimizando tanto el desarrollo (DX) como la velocidad en producción.
 
-### Tecnologías Core (Frontend)
-* **TypeScript (95.9%)**: Código robusto con tipado estricto para prevenir errores en tiempo de compilación.
-* **Vite.js (`vite.config.ts`)**: Entorno de desarrollo rápido y empaquetador eficiente basado en ESM nativo.
-* **Componentes UI (`components.json`)**: Configuración base compatible con **shadcn/ui** y **Tailwind CSS** para un diseño moderno, accesible y consistente.
+### Frontend & UI
+- **React.js & TypeScript**: Arquitectura basada en componentes reactivos con tipado estricto.
+- **Vite.js**: Entorno de desarrollo ultrarrápido y empaquetador basado en ESM nativo.
+- **Tailwind CSS**: Framework de estilos enfocado en utilidades para diseño ágil.
+- **shadcn/ui**: Componentes primitivos, accesibles y personalizables de interfaz.
+
+### Entorno de Ejecución & Dependencias
+- **Bun**: Motor en tiempo de ejecución de alta velocidad y gestor de dependencias principal.
+- **Node.js & NPM**: Soporte de compatibilidad estándar para la resolución de módulos.
+
+### Calidad de Código
+- **ESLint**: Análisis estático del código para asegurar buenas prácticas y consistencia.
+- **Prettier**: Formateador de sintaxis automatizado.
+
+### Infraestructura & Cloud
+- **Cloudflare Workers (`wrangler`)**: Computación Serverless en el Edge para optimizar redirecciones y lógica perimetral.
+- **Vercel Edge Platform**: Hosting de alto rendimiento con despliegue continuo (CI/CD).
 
 ### Entorno de Ejecución y Dependencias
 * **Bun (`bunfig.toml` / `bun.lock`)**: Gestor de paquetes y entorno de ejecución ultra rápido utilizado como motor principal del proyecto.
