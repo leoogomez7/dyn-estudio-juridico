@@ -28,18 +28,6 @@ El proyecto destaca por utilizar herramientas de última generación en el ecosi
 - **Cloudflare Workers (`wrangler`)**: Computación Serverless en el Edge para optimizar redirecciones y lógica perimetral.
 - **Vercel Edge Platform**: Hosting de alto rendimiento con despliegue continuo (CI/CD).
 
-### Entorno de Ejecución y Dependencias
-* **Bun (`bunfig.toml` / `bun.lock`)**: Gestor de paquetes y entorno de ejecución ultra rápido utilizado como motor principal del proyecto.
-* **Node.js / NPM (`package.json` / `package-lock.json`)**: Mantenimiento de compatibilidad estándar para la resolución de módulos independientes.
-
-### Calidad de Código y Estilo
-* **ESLint (`eslint.config.js`)**: Linter modular configurado con las reglas semánticas y de estilo más recientes.
-* **Prettier (`.prettierrc` / `.prettierignore`)**: Formateador de código automatizado para garantizar la limpieza estética del proyecto.
-
-### Infraestructura y Despliegue (Externas)
-* **Vercel Edge Platform (`vercel.json`)**: Plataforma principal de hosting encargada del despliegue continuo (CD) y la distribución global del frontend.
-* **Cloudflare Wranglers (`wrangler.jsonc`)**: Configuración integrada para interactuar con arquitecturas Serverless (Cloudflare Workers / Pages), permitiendo lógica en el *Edge* u optimización de peticiones.
-
 ---
 
 # ⚙️ Requisitos Previos
